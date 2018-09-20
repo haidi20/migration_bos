@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
-use App\Models\User_group;
-use App\Models\Group_access;
-use App\Models\Group_member;
+use App\web\Models\User;
+use App\web\Models\User_group;
+use App\web\Models\Group_access;
+use App\web\Models\Group_member;
 
 class UsersTableSeeder extends Seeder
 {
@@ -17,14 +17,18 @@ class UsersTableSeeder extends Seeder
     {
         User::truncate()->create(
             [
-                'id'       => 'b96acfa0-b7fd-11e8-ab0a-57ae119f6d91',
-                'username' => 'admin',
-                'email'    => 'julfi.upi@gmail.com',
-                'fullname' => 'Administrator',
-                'phone'    => '08115806589',
-                'type'     => 'user',
-                'level'    => 'admin',
-                'password' => bcrypt('admin1')
+                'id'          => 'b96acfa0-b7fd-11e8-ab0a-57ae119f6d91',
+                'username'    => 'admin',
+                'email'       => 'julfi.upi@gmail.com',
+                'fullname'    => 'Administrator',
+                'phone'       => '08115806589',
+                'id_card'     => '',
+                'address'     => '',
+                'last_login'  => '2018-09-19 14:40:06',
+                'last_logout' => '2018-09-19 16:40:06',
+                'type'        => 'user',
+                'level'       => 'admin',
+                'password'    => bcrypt('admin1')
             ]
         );
 

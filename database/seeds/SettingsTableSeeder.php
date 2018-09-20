@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Settings;
+use App\web\Models\Setting;
 
 class SettingsTableSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        Settings::truncate()->create(
+        Setting::truncate()->create(
             [
                 'key'   => 'aplication_name',
                 'value' => 'BOS'

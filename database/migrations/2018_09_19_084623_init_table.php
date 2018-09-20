@@ -68,6 +68,13 @@ class InitTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('ownership', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->string('name');
+            $table->text('description');
+            $table->tinyInteger('isDelete')->default(0);
+        });
+
         Schema::create('projects', function(Blueprint $table){
             $table->string('id')->primary();
             $table->string('name');
@@ -109,6 +116,7 @@ class InitTable extends Migration
         Schema::dropIfExists('group_members');
         Schema::dropIfExists('items');
         Schema::dropIfExists('logs');
+        Schema::dropIfExists('ownership');
         Schema::dropIfExists('plants');
         Schema::dropIfExists('settings');
         Schema::dropIfExists('units');
