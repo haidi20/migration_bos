@@ -83,6 +83,31 @@ class InitTable extends Migration
             $table->tinyInteger('isDelete')->default(0);
         });
 
+        Schema::create('purchase_requisition', function(Blueprint $table){
+            $table->string('id')->primary();
+            $table->string('pr_number');
+            $table->string('ownership_id');
+            $table->string('project_id');
+            $table->string('project_type_id');
+            $table->date('date');
+            $table->text('purpose');
+            $table->text('description');
+            $table->string('author');
+            $table->tinyInteger('isDelete')->default(0);
+            $table->timestamps();
+        });
+
+        Schema::create('purchase_requisition_detail', function(Blueprint $table){
+            $table->string('id')->primary();
+            $table->string('pr_id');
+            $table->string('item_id');
+            $table->string('unit_id');
+            $table->float('quantity', 10, 2);
+            $table->string('user_id');
+            $table->text('reason');
+            $table->timestamps();
+        });
+
         Schema::create('settings', function(Blueprint $table){
             $table->string('id')->primary();
             $table->string('key');
@@ -117,7 +142,9 @@ class InitTable extends Migration
         Schema::dropIfExists('items');
         Schema::dropIfExists('logs');
         Schema::dropIfExists('ownership');
-        Schema::dropIfExists('plants');
+        Schema::dropIfExists('projects');
+        Schema::dropIfExists('purchase_requisition');
+        Schema::dropIfExists('purchase_requisition_detail');
         Schema::dropIfExists('settings');
         Schema::dropIfExists('units');
         Schema::dropIfExists('user_groups');
