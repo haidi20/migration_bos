@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('isDelete')->default(0);
             $table->datetime('last_login');
-            $table->datetime('last_logout');
+            $table->datetime('last_logout')->nullable();
             $table->timestamps();
         });
     }
