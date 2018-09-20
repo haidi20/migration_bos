@@ -83,6 +83,12 @@ class InitTable extends Migration
             $table->tinyInteger('isDelete')->default(0);
         });
 
+        Schema::create('project_type', function(Blueprint $table){
+            $table->string('id')->primary();
+            $table->string('name');
+            $table->tinyInteger('isDelete')->default(0);
+        });
+
         Schema::create('purchase_requisition', function(Blueprint $table){
             $table->string('id')->primary();
             $table->string('pr_number');
@@ -114,6 +120,16 @@ class InitTable extends Migration
             $table->text('value');
         });
 
+        Schema::create('suppliers', function(Blueprint $table){
+            $table->string('id')->primary();
+            $table->string('name');
+            $table->string('email');
+            $table->text('address');
+            $table->string('phone');
+            $table->string('city');
+            $table->tinyInteger('isDelete')->default(0);
+        });
+
         Schema::create('units', function($table){
             $table->string('id')->primary();
             $table->string('name');
@@ -143,9 +159,11 @@ class InitTable extends Migration
         Schema::dropIfExists('logs');
         Schema::dropIfExists('ownership');
         Schema::dropIfExists('projects');
+        Schema::dropIfExists('projects_type');
         Schema::dropIfExists('purchase_requisition');
         Schema::dropIfExists('purchase_requisition_detail');
         Schema::dropIfExists('settings');
+        Schema::dropIfExists('suppliers');
         Schema::dropIfExists('units');
         Schema::dropIfExists('user_groups');
     }
