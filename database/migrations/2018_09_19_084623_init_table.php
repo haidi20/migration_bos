@@ -45,6 +45,7 @@ class InitTable extends Migration
             $table->string('code');
             $table->integer('price_estimate');
             $table->text('description');
+            $table->tinyInteger('type')->default(0);
             $table->tinyInteger('isDelete')->default(0);
         });
 
