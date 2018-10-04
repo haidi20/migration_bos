@@ -153,7 +153,8 @@ class InitTable extends Migration
             $table->tinyInteger('approval_status')->default(0);
             $table->text('description');
             $table->string('author');
-            $table->tinyInteger('read')->default(0);
+            $table->tinyInteger('read_account')->default(0);
+            $table->tinyInteger('read_pm')->default(0);
             $table->tinyInteger('isCompleted')->default(0);
             $table->tinyInteger('isDelete')->default(0);
             $table->timestamps();
