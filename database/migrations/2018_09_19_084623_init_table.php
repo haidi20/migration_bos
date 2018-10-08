@@ -30,6 +30,15 @@ class InitTable extends Migration
             $table->float('range', 20 ,2);
             $table->tinyInteger('isDelete')->default(0);
         });
+
+        Schema::create('authorities_log', function(Blueprint $table){
+            $table->string('id')->primary();
+            $table->integer('order_type');
+            $table->integer('flow');
+            $table->string('group_id');
+            $table->float('range', 20 ,2);
+            $table->tinyInteger('isDelete')->default(0);
+        });
         
         Schema::create('files', function( Blueprint $table ){
             $table->string('id')->primary();
@@ -124,6 +133,7 @@ class InitTable extends Migration
             $table->text('notes');
             $table->string('author');
             $table->tinyInteger('approval_status')->default(0);
+            $table->tinyInteger('no_edit_table')->default(0);
             $table->tinyInteger('isCompleted')->default(0);
             $table->tinyInteger('isDelete')->default(0);
             $table->timestamps();
@@ -155,6 +165,7 @@ class InitTable extends Migration
             $table->string('author');
             $table->tinyInteger('read_account')->default(0);
             $table->tinyInteger('read_pm')->default(0);
+            $table->tinyInteger('no_edit_table')->default(0);
             $table->tinyInteger('isCompleted')->default(0);
             $table->tinyInteger('isDelete')->default(0);
             $table->timestamps();
@@ -212,6 +223,7 @@ class InitTable extends Migration
     {
         Schema::dropIfExists('accounts');
         Schema::dropIfExists('authorities');
+        Schema::dropIfExists('authorities_log');
         Schema::dropIfExists('files');
         Schema::dropIfExists('group_access');
         Schema::dropIfExists('group_members');
