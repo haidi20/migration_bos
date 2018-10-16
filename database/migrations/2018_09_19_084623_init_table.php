@@ -19,25 +19,25 @@ class InitTable extends Migration
             $table->string('code');
             $table->string('name');
             $table->text('description');
+            $table->tinyInteger('checklist')->default(0);
             $table->tinyInteger('isDelete')->default(0);
         });
 
         Schema::create('authorities', function(Blueprint $table){
             $table->string('id')->primary();
-            $table->integer('order_type');
+            $table->integer('purchase_type');
             $table->integer('flow');
             $table->string('group_id');
             $table->float('range', 20 ,2);
-            $table->tinyInteger('isDelete')->default(0);
         });
 
         Schema::create('authorities_log', function(Blueprint $table){
             $table->string('id')->primary();
-            $table->integer('order_type');
+            $table->string('po_id');
+            $table->integer('purchase_type');
             $table->integer('flow');
             $table->string('group_id');
             $table->float('range', 20 ,2);
-            $table->tinyInteger('isDelete')->default(0);
         });
         
         Schema::create('files', function( Blueprint $table ){
@@ -99,6 +99,26 @@ class InitTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('notifications', function(Blueprint $table){
+            $table->string('id')->primary();
+            $table->integer('ref_type');
+            $table->integer('ref_id');
+            $table->integer('flow');
+            $table->string('subject');
+            $table->string('action_code');
+            $table->string('action_from');
+            $table->string('status_email')->default('pending');
+            $table->string('status_android')->default('pending');
+            $table->tinyInteger('type');
+            $table->tinyInteger('approval_status');
+            $table->varchar('user_id');
+            $table->text('description');
+            $table->text('reason');
+            $table->integer('read')->default(0);
+            $table->tinyInteger('isDelete')->default(0);
+            $table->timestamps();
+        });
+
         Schema::create('ownership', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name');
@@ -126,7 +146,7 @@ class InitTable extends Migration
         Schema::create('purchase', function(Blueprint $table){
             $table->string('id')->primary();
             $table->string('pr_id');
-            $table->string('order_number');
+            $table->string('po_number');
             $table->string('supplier_id');
             $table->float('discount', 20, 2);
             $table->float('tax', 20, 2);
@@ -142,6 +162,8 @@ class InitTable extends Migration
         Schema::create('purchase_detail', function(Blueprint $table){
             $table->string('id')->primary();
             $table->string('po_id');
+            $table->string('pr_detail_id');
+            $table->string('account_id');
             $table->string('item_id');
             $table->string('unit_id');
             $table->float('price', 20, 2);
@@ -152,10 +174,13 @@ class InitTable extends Migration
         Schema::create('purchase_requisition', function(Blueprint $table){
             $table->string('id')->primary();
             $table->string('pr_number');
+            $table->string('barcode_type', 20);
+            $table->string('barcode_dns', 10);
+            $table->string('account_id');
             $table->string('destination');
             $table->string('division');
             $table->string('ownership_id');
-            $table->tinyInteger('order_type');
+            $table->tinyInteger('purchase_type');
             $table->string('project_id');
             $table->string('project_type_id');
             $table->text('purpose');
@@ -165,6 +190,7 @@ class InitTable extends Migration
             $table->string('author');
             $table->tinyInteger('read_account')->default(0);
             $table->tinyInteger('read_pm')->default(0);
+            $table->tinyInteger('read_po')->default(0);
             $table->tinyInteger('no_edit_table')->default(0);
             $table->tinyInteger('isCompleted')->default(0);
             $table->tinyInteger('isDelete')->default(0);
@@ -178,6 +204,7 @@ class InitTable extends Migration
             $table->string('unit_id');
             $table->float('quantity', 20, 2);
             $table->float('price_estimate', 20, 2);
+            $table->float('price', 20, 2);
             $table->string('user');
             $table->text('reason');
             $table->timestamps();
@@ -230,6 +257,7 @@ class InitTable extends Migration
         Schema::dropIfExists('group_projects');
         Schema::dropIfExists('items');
         Schema::dropIfExists('logs');
+        Schema::dropIfExists('notifications');
         Schema::dropIfExists('ownership');
         Schema::dropIfExists('projects');
         Schema::dropIfExists('projects_type');
